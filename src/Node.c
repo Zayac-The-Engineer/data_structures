@@ -6,15 +6,11 @@ struct Node {
 };
 
 Node *ncreate() {
-    Node *self = (Node *)malloc(sizeof (Node));
-    self->content = NULL;
-    self->next = NULL;
+    Node *self = (Node *)calloc(1, sizeof (Node));
     return self;
 }
 
 void ndestroy(Node *self) {
-    free(self->content);
-    free(self->next);
     free(self);
 }
 
@@ -22,7 +18,7 @@ Node *nget_next(Node *self) {
     return self->next;
 }
 
-void nset_next(Node *self, void *next) {
+void nset_next(Node *self, Node *next) {
     self->next = next;
 }
 
