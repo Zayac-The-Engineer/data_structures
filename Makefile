@@ -19,10 +19,10 @@ DEBUGFLAGS  := -ggdb -O0
 
 .PHONY: clean all run debug
 
-debug: CFLAGS = $(CFLAGS) $(DEBUGFLAGS)
-debug: all
-
 all: $(TARGET)
+
+debug: CFLAGS := $(CFLAGS) $(DEBUGFLAGS)
+debug: all
 
 $(TARGET): $(OBJS) | $(BIN)
 	$(CC) $(CFLAGS) $^ -o $@
