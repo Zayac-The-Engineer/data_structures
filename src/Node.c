@@ -6,20 +6,11 @@ struct Node {
 };
 
 Node *ncreate() {
-    Node *self = (Node *)calloc(1, sizeof (Node));
-    return self;
+    return (Node *)calloc(1, sizeof (Node));
 }
 
 void ndestroy(Node *self) {
     free(self);
-}
-
-Node *nget_next(Node *self) {
-    return self->next;
-}
-
-void nset_next(Node *self, Node *next) {
-    self->next = next;
 }
 
 void *nget_content(Node *self) {
@@ -28,4 +19,12 @@ void *nget_content(Node *self) {
 
 void nset_content(Node *self, void *content) {
     self->content = content;
+}
+
+Node *nget_next(Node *self) {
+    return self->next;
+}
+
+void nset_next(Node *self, Node *next) {
+    self->next = next;
 }

@@ -8,6 +8,7 @@ typedef struct Stack Stack;
 
 Stack *stcreate();
 void stdestroy(Stack *self);
+
 void stpush(Stack *self, void *content);
 void *stpop(Stack *self);
 void *stpeek(Stack *self);
