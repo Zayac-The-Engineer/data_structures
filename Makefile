@@ -1,41 +1,41 @@
 ##
-# Data structure thingy
+# data structure project thing
 #
 # @file
 # @version 0.1
-CC          := gcc
+
+MAKE		:= make
 MKDIR		:= mkdir
-RMDIR		:= rm -r
-BIN         := ./bin
-OBJ         := ./obj
-INCLUDE     := ./include
-SRC	        := ./src
-SRCS        := $(wildcard $(SRC)/*.c)
-OBJS        := $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(SRCS))
-TARGET      := $(BIN)/prog
-CFLAGS      := -I$(INCLUDE)
-LDLIBS      := -lm
-DEBUGFLAGS  := -ggdb -O0
+RMDIR		:= rm -rf
 
-.PHONY: clean all run debug
+SRC			:= ./src
+TEST		:= ./test
+OBJ			:= ./obj
+BIN			:= ./bin
+LIB			:= ./lib
 
-all: $(TARGET)
+TARGET		:= all
 
-debug: CFLAGS := $(CFLAGS) $(DEBUGFLAGS)
+.PHONY: all clean debug test libs run
+
+all: test
+
+debug: TARGET := debug
 debug: all
 
-$(TARGET): $(OBJS) | $(BIN)
-	$(CC) $(CFLAGS) $^ -o $@
+run: all
+	$(MAKE) -C $(TEST) $@
 
-$(OBJ)/%.o: $(SRC)/%.c | $(OBJ)
-	$(CC) $(CFLAGS) -c $< -o $@
+test: libs | $(BIN)
+	$(MAKE) -C $(TEST) $(TARGET)
 
-run: $(TARGET)
-	./$<
+libs: | $(LIB) $(OBJ)
+	$(MAKE) -C $(SRC) $(TARGET)
 
-$(BIN) $(OBJ):
+$(OBJ) $(BIN) $(LIB):
 	$(MKDIR) $@
 
 clean:
-	$(RMDIR) $(OBJ) $(BIN)
+	$(RMDIR) $(OBJ) $(BIN) $(LIB)
+
 # end

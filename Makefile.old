@@ -1,0 +1,60 @@
+##
+# Data structure thingy
+#
+# @file
+# @version 0.1
+CC			:= gcc
+MKDIR		:= mkdir
+RMDIR		:= rm -rf
+
+BIN			:= ./bin
+OBJ			:= ./obj
+INCLUDE		:= ./include
+SRC			:= ./src
+
+SRCS		:= $(wildcard $(SRC)/*.c)
+OBJS		:= $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
+# TARGETS		:= $(patsubst $(SRC)/%.c, $(BIN)/%, ./main.c)
+# TARGET		:= $(BIN)/prog
+
+TEST		:= ./test
+TESTSRCS	:= $(wildcard $(TEST)/*.c)
+TESTOBJS	:= $(patsubst $(TEST)/%.c, $(OBJ)/%.o, $(TESTSRCS))
+TESTTARGETS	:= $(patsubst $(TEST)/%.c, $(BIN)/%, $(TESTSRCS))
+
+CFLAGS		:= -I$(INCLUDE)
+DEBUGFLAGS	:= -ggdb -O0
+
+.PHONY: clean all run debug test
+
+all: $(TARGETS)
+
+test: SRCS := $(SRCS) $(TESTSRCS)
+test: OBJS := $(OBJS) $(TESTOBJS)
+test: TARGETS := $(TESTTARGETS)
+test: all
+	@echo $(TESTSRCS)
+	@echo $(SRCS)
+	@echo $(OBJS)
+	@echo $(TARGETS)
+
+debug: CFLAGS := $(CFLAGS) $(DEBUGFLAGS)
+debug: all
+
+$(TARGETS): $(OBJS) | $(BIN)
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(OBJ)/%.o: $(SRC)/%.c | $(OBJ)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ)/%.o: $(TEST)/%.c | $(OBJ)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# run: $(TARGET)
+# 	./$<
+
+$(BIN) $(OBJ):
+	$(MKDIR) $@
+clean:
+	$(RMDIR) $(OBJ) $(BIN)
+# end
