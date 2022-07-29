@@ -6,7 +6,7 @@ struct LinkedList {
 };
 
 LinkedList *llcreate() {
-    return (LinkedList *)calloc(1, sizeof (LinkedList));
+    return calloc(1, sizeof (LinkedList));
 }
 
 void lldestroy(LinkedList *self) {
@@ -39,6 +39,10 @@ void *llpop(LinkedList *self) {
     ndestroy(self->head);
     self->head = buf;
     return content;
+}
+
+Node *llget_head(LinkedList *self) {
+    return self->head;
 }
 
 void *llget(LinkedList *self, size_t idx) {

@@ -6,7 +6,7 @@ struct Node {
 };
 
 Node *ncreate() {
-    return (Node *)calloc(1, sizeof (Node));
+    return calloc(1, sizeof (Node));
 }
 
 void ndestroy(Node *self) {

@@ -6,7 +6,7 @@ struct Stack {
 };
 
 Stack *stcreate() {
-    return (Stack *)calloc(1, sizeof(Stack));
+    return calloc(1, sizeof(Stack));
 }
 
 void stdestroy(Stack *self) {

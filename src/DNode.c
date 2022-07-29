@@ -7,7 +7,7 @@ struct DNode {
 };
 
 DNode *dncreate() {
-    DNode *self = (DNode *)calloc(1, sizeof (DNode));
+    DNode *self = calloc(1, sizeof (DNode));
     self->self = ncreate();
     return self;
 }

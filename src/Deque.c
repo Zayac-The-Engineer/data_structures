@@ -8,7 +8,7 @@ struct Deque {
 };
 
 Deque *dqcreate() {
-    return (Deque *)calloc(1, sizeof (Deque));
+    return calloc(1, sizeof (Deque));
 }
 
 void dqdestroy(Deque *self) {

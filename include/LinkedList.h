@@ -12,6 +12,8 @@ void lldestroy(LinkedList *self);
 
 void llpush(LinkedList *self, void *content);
 void *llpop(LinkedList *self);
-void *llget(LinkedList *self, size_t idex);
+/* void *llpeek(LinkedList *self); */
+Node *llget_head(LinkedList *self);
+void *llget(LinkedList *self, size_t idx);
 
 #endif // LINKEDLIST_H_
